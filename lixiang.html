@@ -427,8 +427,8 @@
             <div class="stat-card">
                 <h3>2025年交付量</h3>
                 <div class="stat-value">40.63万辆</div>
-                <div class="stat-change positive">+8.5% YoY</div>
-                <p style="color: var(--text-secondary); margin-top: 1rem;">月均3.39万辆 | 2024年37.4万辆</p>
+                <div class="stat-change negative">-18.7% YoY</div>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">月均3.39万辆 | 2024年50.0万辆</p>
             </div>
             <div class="stat-card">
                 <h3>毛利率</h3>
@@ -746,18 +746,18 @@
         const lixiangData = {
             currentPrice: { hkd: 0, usd: 0, change24h: 0 }, // 将通过API获取
             delivery2025: 406300,  // 2025年实际交付40.63万辆（官方数据）
-            delivery2024: 374000,  // 2024年交付37.4万辆
+            delivery2024: 500000,  // 2024年交付50.0万辆
             grossMargin: 22.8,
             pe: 18.5,
 
             priceHistory: {
                 labels: ['2022Q2', '2022Q4', '2023Q2', '2023Q4', '2024Q2', '2024Q4', '2025Q2', '2025Q4', '2026Q1', '2026预测'],
-                data: [28, 24, 42, 68, 95, 88, 82, 75, 75, 85]  // 更新为符合70-80区间的真实走势
+                data: [28, 24, 42, 68, 95, 102, 88, 75, 75, 85]  // 更新：2024高点后回落
             },
 
             deliveryHistory: {
                 labels: ['2024Q1', '2024Q2', '2024Q3', '2024Q4', '2025Q1', '2025Q2', '2025Q3', '2025Q4', '2026Q1预测', '2026Q2预测', '2026Q3预测', '2026Q4预测'],
-                data: [80.4, 108.6, 105.2, 79.8, 96.5, 103.8, 98.2, 103.7, 110.0, 120.0, 125.0, 115.0]  // 真实季度数据，2025总计约40万
+                data: [80.4, 108.6, 152.8, 158.2, 96.5, 103.8, 98.2, 108.0, 110.0, 115.0, 120.0, 115.0]  // 真实数据：2024高峰50万，2025回落至40.63万
             },
 
             marginComparison: {
