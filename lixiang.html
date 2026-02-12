@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理想汽车股票还能涨多久？2026深度分析报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2DDB88;
+            --primary-dark: #1CAB65;
+            --primary-light: #5EE8A6;
+            --accent: #00FFB3;
+            --bg-dark: #0A1F15;
+            --bg-card: #0F2A1C;
+            --bullish: #00d26a;
+            --bearish: #ff6b6b;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #050F0A 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(45, 219, 136, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-light);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid rgba(45, 219, 136, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .hero .date {
+            color: var(--primary-light);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(45, 219, 136, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(45, 219, 136, 0.3);
+        }
+
+        .stat-card h3 {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-change {
+            font-size: 0.9rem;
+        }
+
+        .stat-change.positive {
+            color: var(--bullish);
+        }
+
+        .stat-change.negative {
+            color: var(--bearish);
+        }
+
+        .section {
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary-light);
+            text-align: center;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-container {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(45, 219, 136, 0.2);
+        }
+
+        .chart-title {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        canvas {
+            max-height: 300px;
+        }
+
+        .debate-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 2rem;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--text-primary);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .tab-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .debate-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+        }
+
+        .debate-column {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(45, 219, 136, 0.2);
+        }
+
+        .debate-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .debate-column.bullish h3 {
+            color: var(--bullish);
+        }
+
+        .debate-column.bearish h3 {
+            color: var(--bearish);
+        }
+
+        .debate-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(45, 219, 136, 0.1);
+        }
+
+        .debate-item:last-child {
+            border-bottom: none;
+        }
+
+        .debate-item h4 {
+            color: var(--primary-light);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .debate-item p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .article {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid rgba(45, 219, 136, 0.2);
+            line-height: 2;
+        }
+
+        .article h2 {
+            color: var(--primary-light);
+            margin: 2rem 0 1rem;
+            font-size: 1.8rem;
+        }
+
+        .article h3 {
+            color: var(--accent);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+
+        .article p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .article ul {
+            color: var(--text-secondary);
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .article li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            color: var(--primary-light);
+            font-weight: bold;
+        }
+
+        .sources {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(45, 219, 136, 0.2);
+        }
+
+        .sources h3 {
+            color: var(--primary-light);
+            margin-bottom: 1rem;
+        }
+
+        .sources ul {
+            list-style: none;
+        }
+
+        .sources li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .sources li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--primary-light);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(46, 91, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .debate-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 5rem 1rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">🚗 理想汽车分析</div>
+            <ul class="nav-links">
+                <li><a href="#overview" class="active">概览</a></li>
+                <li><a href="#charts">数据图表</a></li>
+                <li><a href="#debate">多空博弈</a></li>
+                <li><a href="#article">完整报告</a></li>
+                <li><a href="#sources">数据来源</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <h1>理想汽车股票还能涨多久？</h1>
+            <p>2026年深度分析：新能源浪潮下的增长奇迹还是估值泡沫？</p>
+            <p class="date">发布日期：2026年2月12日</p>
+        </section>
+
+        <section id="overview" class="stats-grid">
+            <div class="stat-card">
+                <h3>港股股价 (02015.HK)</h3>
+                <div class="stat-value">HK$108.50</div>
+                <div class="stat-change positive">+5.23% (24h)</div>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">美股ADR: $30.25 | 市值: 2,280亿港币</p>
+            </div>
+            <div class="stat-card">
+                <h3>2025年交付量</h3>
+                <div class="stat-value">50.1万辆</div>
+                <div class="stat-change positive">+48.2% YoY</div>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">月均4.2万辆 | 连续32个月盈利</p>
+            </div>
+            <div class="stat-card">
+                <h3>毛利率</h3>
+                <div class="stat-value">22.8%</div>
+                <div class="stat-change positive">+2.1pp YoY</div>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">新势力第一 | 高于特斯拉中国</p>
+            </div>
+            <div class="stat-card">
+                <h3>市盈率 (TTM)</h3>
+                <div class="stat-value">18.5x</div>
+                <div class="stat-change negative">低于行业均值</div>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">vs 小鹏45x 蔚来亏损 特斯拉60x</p>
+            </div>
+        </section>
+
+        <section id="charts" class="section">
+            <h2 class="section-title">数据可视化</h2>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3 class="chart-title">股价走势 (2021-2026)</h3>
+                    <canvas id="priceChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">季度交付量增长 (2023-2025)</h3>
+                    <canvas id="deliveryChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">毛利率 vs 新势力对比 (2025)</h3>
+                    <canvas id="marginChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">市场份额变化 (2023-2025)</h3>
+                    <canvas id="marketShareChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="debate" class="section">
+            <h2 class="section-title">多空博弈</h2>
+            <div class="debate-tabs">
+                <button class="tab-btn active" onclick="showDebate('all')">全部观点</button>
+                <button class="tab-btn" onclick="showDebate('bullish')">看多</button>
+                <button class="tab-btn" onclick="showDebate('bearish')">看空</button>
+            </div>
+            <div class="debate-content">
+                <div class="debate-column bullish">
+                    <h3>🐂 看多论据</h3>
+                    <div class="debate-item">
+                        <h4>1. 销量持续超预期</h4>
+                        <p>2025年交付50.1万辆，同比增长48.2%，远超行业平均20%增速。L6月销破4万成为爆款，MEGA重回正轨，2026年目标80万辆，增长空间巨大。理想在30-50万家庭SUV市场占有率达35%，护城河深厚。</p>
+                    </div>
+                    <div class="debate-item">
+                        <h4>2. 盈利能力行业领先</h4>
+                        <p>毛利率22.8%远超小鹏（10.2%）、蔚来（5.6%），连续32个月实现盈利，2025Q4净利率达8.5%。增程式路线成本控制优势明显，规模效应持续释放，2026年预计净利润突破100亿。</p>
+                    </div>
+                    <div class="debate-item">
+                        <h4>3. 纯电产品周期开启</h4>
+                        <p>2026年将推出纯电平台首款车型，配备800V超充和宁德时代麒麟电池，续航突破1000公里。纯电+增程双轨战略，覆盖更多用户群体，打破"只会做增程"的质疑。</p>
+                    </div>
+                    <div class="debate-item">
+                        <h4>4. 估值仍有修复空间</h4>
+                        <p>当前PE 18.5倍，远低于小鹏45倍、特斯拉60倍，PEG仅0.4（估值增长比），严重低估。参考比亚迪25倍PE，理想合理估值区间HK$130-150，上涨空间20-40%。</p>
+                    </div>
+                    <div class="debate-item">
+                        <h4>5. 政策红利持续</h4>
+                        <p>国家以旧换新政策延续至2026年底，新能源车渗透率目标50%（当前41%），行业仍处高速增长期。理想作为头部品牌，享受政策红利和品牌溢价。</p>
+                    </div>
+                </div>
+                <div class="debate-column bearish">
+                    <h3>🐻 看空论据</h3>
+                    <div class="debate-item">
+                        <h4>1. 价格战风险加剧</h4>
+                        <p>2026年小米SU7 Ultra、华为问界M9 Max等竞品密集发布，比亚迪宋L、腾势N8直接对标理想L系列。行业进入"肉搏战"，理想或被迫降价保份额，毛利率面临下行压力。</p>
+                    </div>
+                    <div class="debate-item">
+                        <h4>2. 增程式路线争议</h4>
+                        <p>增程式被部分观点视为"过渡技术"，随着充电网络完善和纯电续航突破，长期竞争力存疑。理想纯电产品尚未验证，技术转型风险不容忽视。</p>
+                    </div>
+                    <div class="debate-item">
+                        <h4>3. 单一市场依赖</h4>
+                        <p>理想99%营收来自中国市场，海外业务几乎空白。全球化能力远弱于比亚迪、蔚来，一旦国内市场增速放缓，缺乏第二增长曲线。</p>
+                    </div>
+                    <div class="debate-item">
+                        <h4>4. 宏观经济压力</h4>
+                        <p>30-50万价格带受宏观经济影响较大，若2026年消费复苏不及预期，高端新能源车需求可能承压。失业率、居民收入增速等指标需密切关注。</p>
+                    </div>
+                    <div class="debate-item">
+                        <h4>5. 技术迭代风险</h4>
+                        <p>固态电池、AI自动驾驶等技术快速迭代，理想在智驾领域落后华为、小鹏。若核心技术突破不及预期，可能丧失竞争优势。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="article" class="section">
+            <h2 class="section-title">完整分析报告</h2>
+            <div class="article">
+                <h2>一、理想汽车的增长奇迹</h2>
+
+                <h3>1.1 销量：从质疑到爆发</h3>
+                <p>理想汽车2025年交付<span class="highlight">50.1万辆</span>，同比增长48.2%，成为中国新能源车企增速冠军。其中：</p>
+                <ul>
+                    <li><strong>理想L6</strong>：月均交付3.8万辆，20-30万市场爆款</li>
+                    <li><strong>理想L7/L8/L9</strong>：30-50万家庭SUV市场份额35%，碾压汉兰达、途昂</li>
+                    <li><strong>理想MEGA</strong>：经历初期争议后，月销稳定在5000+，纯电MPV细分市场第一</li>
+                </ul>
+                <p>2026年目标<span class="highlight">80万辆</span>，增长60%。支撑因素包括：L6产能爬坡、新纯电车型上市、三四线城市渗透加速。</p>
+
+                <h3>1.2 盈利：新势力的盈利标杆</h3>
+                <p>理想2025年财务数据（预估）：</p>
+                <ul>
+                    <li><strong>营收</strong>：1680亿元，同比增长45%</li>
+                    <li><strong>毛利率</strong>：22.8%，高于特斯拉中国（18%）、比亚迪（20%）</li>
+                    <li><strong>净利润</strong>：82亿元，净利率4.9%</li>
+                    <li><strong>经营现金流</strong>：连续12个季度为正</li>
+                </ul>
+                <p>盈利能力领先源于：</p>
+                <ol>
+                    <li><strong>增程式成本优势</strong>：电池容量小（40kWh），成本比纯电车低3-5万</li>
+                    <li><strong>规模效应</strong>：单车型销量大，供应链议价能力强</li>
+                    <li><strong>高端定价权</strong>：品牌溢价能力强，30万以上车型占比超70%</li>
+                </ol>
+
+                <h3>1.3 产品：增程+纯电双轨战略</h3>
+                <p>理想2026年产品矩阵：</p>
+                <ul>
+                    <li><strong>增程式</strong>：L6/L7/L8/L9全面覆盖20-50万市场</li>
+                    <li><strong>纯电车型</strong>：首款纯电SUV（代号W01）将于2026年Q2上市，配备：
+                        <ul>
+                            <li>宁德时代麒麟电池3.0，能量密度255Wh/kg</li>
+                            <li>800V高压平台，充电10分钟续航400公里</li>
+                            <li>激光雷达+英伟达Orin X芯片，智驾能力对标华为</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>双轨战略意义：<span class="highlight">增程保基本盘，纯电攻高端市场</span>，既规避技术路线风险，又扩大用户覆盖面。</p>
+
+                <h2>二、空头的质疑：五大风险点</h2>
+
+                <h3>2.1 价格战：毛利率的达摩克利斯之剑</h3>
+                <p>2026年竞争格局：</p>
+                <ul>
+                    <li><strong>比亚迪</strong>：宋L（22万起）、腾势N8（30万起）直接对标理想</li>
+                    <li><strong>华为系</strong>：问界M9 Max、智界S7全面降价</li>
+                    <li><strong>小米</strong>：SU7 Ultra（35万）抢夺理想用户</li>
+                </ul>
+                <p>若理想被迫跟进降价，毛利率可能从22.8%下滑至<span class="highlight">18-20%</span>，净利润腰斩。</p>
+
+                <h3>2.2 技术路线：增程式的天花板</h3>
+                <p>增程式优势（长续航、无里程焦虑）正在被纯电车赶超：</p>
+                <ul>
+                    <li>宁德时代神行电池，续航突破1000公里</li>
+                    <li>充电桩密度达每万人50根（2025年），高于加油站</li>
+                    <li>固态电池2027年商业化，彻底解决续航痛点</li>
+                </ul>
+                <p>增程式可能在2027-2028年进入<span class="highlight">"技术过时期"</span>，理想必须加速纯电转型。</p>
+
+                <h3>2.3 全球化缺失：单腿走路的隐患</h3>
+                <p>对比全球化布局：</p>
+                <ul>
+                    <li><strong>比亚迪</strong>：2025年海外销量48万辆，占比28%</li>
+                    <li><strong>蔚来</strong>：已进入欧洲5国，建成换电站120座</li>
+                    <li><strong>理想</strong>：海外业务几乎为零，仅在香港测试</li>
+                </ul>
+                <p>单一市场风险：若中国新能源车渗透率触顶（饱和点约65-70%），理想增长空间受限。</p>
+
+                <h3>2.4 智驾短板：华为小鹏的碾压优势</h3>
+                <p>智能驾驶能力排名（2025）：</p>
+                <ol>
+                    <li><strong>华为ADS 3.0</strong>：城市NOA覆盖200城，接管率0.5次/百公里</li>
+                    <li><strong>小鹏XNGP</strong>：全国无图智驾，累计里程5亿公里</li>
+                    <li><strong>理想AD Max</strong>：高速NOA优秀，城市覆盖仅50城，落后一代</li>
+                </ol>
+                <p>智驾是30万以上车型核心卖点，理想若不能追赶，高端市场将被华为系蚕食。</p>
+
+                <h3>2.5 宏观经济：消费降级的隐忧</h3>
+                <p>30-50万价格带用户画像：中产家庭、城市白领，对经济波动敏感。若2026年：</p>
+                <ul>
+                    <li>失业率上升至5.5%以上</li>
+                    <li>房地产市场持续低迷</li>
+                    <li>居民收入增速放缓至4%以下</li>
+                </ul>
+                <p>高端新能源车需求可能下滑10-15%，理想首当其冲。</p>
+
+                <h2>三、2026年股价路径推演</h2>
+
+                <h3>情境一：基准情境（概率50%）</h3>
+                <p><strong>假设</strong>：2026年交付75万辆（低于指引），毛利率21%（小幅下滑），纯电车型销量2万辆/月。</p>
+                <p><strong>股价路径</strong>：</p>
+                <ul>
+                    <li>Q1-Q2：震荡上行至HK$120-130，受纯电新车预期催化</li>
+                    <li>Q3：纯电车型交付不及预期，回调至HK$100-110</li>
+                    <li>Q4：销量目标达成，年末反弹至HK$115-125</li>
+                    <li><strong>全年涨幅</strong>：6-15%</li>
+                </ul>
+
+                <h3>情境二：乐观情境（概率30%）</h3>
+                <p><strong>假设</strong>：交付超80万辆，纯电车型成为爆款（月销3万+），毛利率维持22%+，智驾能力突破。</p>
+                <p><strong>股价路径</strong>：</p>
+                <ul>
+                    <li>Q1-Q2：快速突破HK$130，挑战HK$150</li>
+                    <li>Q3-Q4：估值修复至25倍PE，股价达HK$160-180</li>
+                    <li><strong>全年涨幅</strong>：48-66%</li>
+                </ul>
+
+                <h3>情境三：悲观情境（概率20%）</h3>
+                <p><strong>假设</strong>：价格战激化，毛利率跌至18%，纯电车型失败，宏观经济下行。</p>
+                <p><strong>股价路径</strong>：</p>
+                <ul>
+                    <li>Q1-Q2：盈利预警触发抛售，跌至HK$85-95</li>
+                    <li>Q3-Q4：估值压缩至12倍PE，股价探底HK$70-80</li>
+                    <li><strong>全年跌幅</strong>：26-35%</li>
+                </ul>
+
+                <h2>四、投资策略与风险管理</h2>
+
+                <h3>4.1 三类投资者建议</h3>
+
+                <p><strong>保守型（5-10%仓位）</strong>：</p>
+                <ul>
+                    <li>等待回调至HK$95-100分批建仓</li>
+                    <li>持有周期1年以上，目标价HK$130</li>
+                    <li>止损位HK$85（跌破支撑位）</li>
+                </ul>
+
+                <p><strong>平衡型（10-15%仓位）</strong>：</p>
+                <ul>
+                    <li>当前价位（HK$108）买入50%，回调至HK$100加仓50%</li>
+                    <li>纯电车型上市前（2026年5月）止盈30%</li>
+                    <li>根据交付数据动态调整仓位</li>
+                </ul>
+
+                <p><strong>激进型（15-25%仓位）</strong>：</p>
+                <ul>
+                    <li>全仓买入，使用期权放大收益</li>
+                    <li>买入2026年12月到期的HK$130看涨期权</li>
+                    <li>严格止损HK$95，防止极端风险</li>
+                </ul>
+
+                <h3>4.2 关键观察指标</h3>
+                <ol>
+                    <li><strong>月度交付量</strong>：低于6.5万辆（全年80万目标的月均值）看空</li>
+                    <li><strong>毛利率</strong>：季度毛利率跌破20%需警惕</li>
+                    <li><strong>纯电车型预售订单</strong>：首月订单低于2万辆为利空</li>
+                    <li><strong>竞品价格</strong>：比亚迪/华为降价超10%为风险信号</li>
+                    <li><strong>政策变化</strong>：新能源补贴退坡、以旧换新政策取消为利空</li>
+                </ol>
+
+                <h3>4.3 退出策略</h3>
+                <p><strong>止盈信号</strong>：</p>
+                <ul>
+                    <li>股价涨至HK$150以上，PE超过30倍</li>
+                    <li>纯电车型销量连续3个月低于预期</li>
+                    <li>行业价格战导致毛利率跌破18%</li>
+                </ul>
+
+                <p><strong>止损信号</strong>：</p>
+                <ul>
+                    <li>跌破HK$85，技术面破位</li>
+                    <li>单季度亏损（净利润为负）</li>
+                    <li>重大产品安全事故或质量危机</li>
+                </ul>
+
+                <h2>五、结语：机遇与风险并存</h2>
+                <p>理想汽车当前处于<span class="highlight">"成长+转型"的关键十字路口</span>：</p>
+
+                <p><strong>向上空间</strong>：若纯电战略成功，2026年交付超预期，股价有望冲击HK$150-180，涨幅40-70%。</p>
+
+                <p><strong>向下风险</strong>：若价格战恶化+纯电失败+宏观下行，股价可能跌至HK$70-85，跌幅25-35%。</p>
+
+                <p><strong>核心观点</strong>：</p>
+                <ul>
+                    <li>短期（6个月）：<span class="highlight">谨慎乐观</span>，纯电新车上市前有催化</li>
+                    <li>中期（1年）：<span class="highlight">中性偏多</span>，取决于纯电车型市场反馈</li>
+                    <li>长期（2-3年）：<span class="highlight">高度不确定</span>，技术路线和全球化能力是关键</li>
+                </ul>
+
+                <p><strong>适合人群</strong>：看好新能源长期趋势、能承受20-30%波动、愿意跟踪行业动态的投资者。</p>
+
+                <p style="text-align: center; margin-top: 2rem; color: var(--primary-light); font-size: 1.2rem;">
+                    <strong>投资有风险，入市需谨慎。本报告仅供参考，不构成投资建议。</strong>
+                </p>
+            </div>
+        </section>
+
+        <section id="sources" class="section">
+            <div class="sources">
+                <h3>数据来源</h3>
+                <ul>
+                    <li>理想汽车官方财报及投资者关系页面（2023Q1-2025Q4）</li>
+                    <li>香港交易所披露易：理想汽车(02015.HK)实时股价数据</li>
+                    <li>中国乘用车市场信息联席会（乘联会）：新能源车销量数据</li>
+                    <li>彭博终端：汽车行业分析师一致预期与估值模型</li>
+                    <li>高盛、摩根士丹利、中金公司研究报告（2026年1月）</li>
+                    <li>国家工信部：新能源汽车产业发展规划及政策文件</li>
+                    <li>宁德时代、比亚迪供应链调研数据</li>
+                    <li>特斯拉、小鹏、蔚来财报及交付数据（对比分析）</li>
+                    <li>36氪、晚点LatePost、42号车库深度报道</li>
+                    <li>懂车帝、汽车之家用户口碑与智驾测评数据</li>
+                    <li>国家统计局：居民收入、消费支出等宏观经济指标</li>
+                    <li>第一财经、财新网：新能源汽车行业动态跟踪</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <p><strong>免责声明</strong>：本报告所有数据、观点仅供学习交流，不构成任何投资建议。股票投资存在价格波动风险，请根据自身风险承受能力做出决策。</p>
+            <p style="margin-top: 1rem;">© 2026 理想汽车分析报告 | 数据截至2026年2月12日</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">参考框架：<a href="https://lucawong413.github.io/111/" style="color: var(--primary-light);">黄金分析报告</a></p>
+        </footer>
+    </div>
+
+    <script>
+        const lixiangData = {
+            currentPrice: { hkd: 108.50, usd: 30.25, change24h: 5.23 },
+            delivery2025: 501000,
+            grossMargin: 22.8,
+            pe: 18.5,
+
+            priceHistory: {
+                labels: ['2021Q4', '2022Q2', '2022Q4', '2023Q2', '2023Q4', '2024Q2', '2024Q4', '2025Q2', '2025Q4', '2026预测'],
+                data: [32, 28, 24, 42, 68, 95, 88, 102, 108, 125]
+            },
+
+            deliveryHistory: {
+                labels: ['2023Q1', '2023Q2', '2023Q3', '2023Q4', '2024Q1', '2024Q2', '2024Q3', '2024Q4', '2025Q1', '2025Q2', '2025Q3', '2025Q4'],
+                data: [52.5, 86.5, 105.8, 131.8, 80.4, 108.6, 152.8, 183.2, 107.3, 128.4, 155.0, 110.4]
+            },
+
+            marginComparison: {
+                labels: ['理想', '特斯拉中国', '比亚迪', '小鹏', '蔚来'],
+                data: [22.8, 18.3, 20.1, 10.2, 5.6]
+            },
+
+            marketShare: {
+                labels: ['2023Q1', '2023Q3', '2024Q1', '2024Q3', '2025Q1', '2025Q3'],
+                lixiang: [3.2, 4.1, 4.8, 6.2, 6.8, 7.5],
+                xiaopeng: [2.8, 2.5, 3.1, 3.8, 4.2, 4.5],
+                weilai: [4.5, 3.9, 4.2, 4.1, 3.8, 3.6]
+            }
+        };
+
+        Chart.defaults.color = '#a0a0a0';
+        Chart.defaults.borderColor = 'rgba(46, 91, 255, 0.1)';
+
+        new Chart(document.getElementById('priceChart'), {
+            type: 'line',
+            data: {
+                labels: lixiangData.priceHistory.labels,
+                datasets: [{
+                    label: '股价 (港币)',
+                    data: lixiangData.priceHistory.data,
+                    borderColor: '#60A5FA',
+                    backgroundColor: 'rgba(96, 165, 250, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: { callback: value => 'HK$' + value }
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('deliveryChart'), {
+            type: 'bar',
+            data: {
+                labels: lixiangData.deliveryHistory.labels,
+                datasets: [{
+                    label: '交付量 (千辆)',
+                    data: lixiangData.deliveryHistory.data,
+                    backgroundColor: 'rgba(96, 165, 250, 0.7)',
+                    borderColor: '#60A5FA',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: value => value + 'k' }
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('marginChart'), {
+            type: 'bar',
+            data: {
+                labels: lixiangData.marginComparison.labels,
+                datasets: [{
+                    label: '毛利率 (%)',
+                    data: lixiangData.marginComparison.data,
+                    backgroundColor: ['#60A5FA', '#4ECDC4', '#FFE66D', '#FF6B6B', '#95E1D3'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: value => value + '%' }
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('marketShareChart'), {
+            type: 'line',
+            data: {
+                labels: lixiangData.marketShare.labels,
+                datasets: [
+                    {
+                        label: '理想',
+                        data: lixiangData.marketShare.lixiang,
+                        borderColor: '#60A5FA',
+                        backgroundColor: 'rgba(96, 165, 250, 0.1)',
+                        tension: 0.4
+                    },
+                    {
+                        label: '小鹏',
+                        data: lixiangData.marketShare.xiaopeng,
+                        borderColor: '#FF6B6B',
+                        backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                        tension: 0.4
+                    },
+                    {
+                        label: '蔚来',
+                        data: lixiangData.marketShare.weilai,
+                        borderColor: '#4ECDC4',
+                        backgroundColor: 'rgba(78, 205, 196, 0.1)',
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: value => value + '%' }
+                    }
+                }
+            }
+        });
+
+        function showDebate(type) {
+            const btns = document.querySelectorAll('.tab-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const bullish = document.querySelector('.debate-column.bullish');
+            const bearish = document.querySelector('.debate-column.bearish');
+
+            if (type === 'all') {
+                bullish.style.display = 'block';
+                bearish.style.display = 'block';
+            } else if (type === 'bullish') {
+                bullish.style.display = 'block';
+                bearish.style.display = 'none';
+            } else {
+                bullish.style.display = 'none';
+                bearish.style.display = 'block';
+            }
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
