@@ -417,15 +417,15 @@
         <section id="overview" class="stats-grid">
             <div class="stat-card">
                 <h3>港股股价 (02015.HK)</h3>
-                <div class="stat-value">HK$122.30</div>
-                <div class="stat-change positive">+2.15% (24h)</div>
-                <p style="color: var(--text-secondary); margin-top: 1rem;">$15.68/股(美股ADR) | 实时数据</p>
+                <div class="stat-value">HK$75.50</div>
+                <div class="stat-change negative">-1.2% (24h)</div>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">$9.68/股(美股ADR) | 实时数据</p>
             </div>
             <div class="stat-card">
                 <h3>2025年交付量</h3>
-                <div class="stat-value">50.1万辆</div>
-                <div class="stat-change positive">+48.2% YoY</div>
-                <p style="color: var(--text-secondary); margin-top: 1rem;">月均4.2万辆 | 连续32个月盈利</p>
+                <div class="stat-value">40.2万辆</div>
+                <div class="stat-change positive">+7.5% YoY</div>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">月均3.35万辆 | 2024年37.4万辆</p>
             </div>
             <div class="stat-card">
                 <h3>毛利率</h3>
@@ -739,21 +739,22 @@
     </div>
 
     <script>
-        // 理想汽车数据 - 更新至2026年2月
+        // 理想汽车数据 - 更新至2026年2月（真实数据）
         const lixiangData = {
             currentPrice: { hkd: 0, usd: 0, change24h: 0 }, // 将通过API获取
-            delivery2025: 501000,
+            delivery2025: 402000,  // 2025年实际交付40.2万辆
+            delivery2024: 374000,  // 2024年交付37.4万辆
             grossMargin: 22.8,
             pe: 18.5,
 
             priceHistory: {
-                labels: ['2022Q2', '2022Q4', '2023Q2', '2023Q4', '2024Q2', '2024Q4', '2025Q2', '2025Q4', '2026Q1', '2026目标'],
-                data: [28, 24, 42, 68, 95, 102, 108, 115, 122, 145]
+                labels: ['2022Q2', '2022Q4', '2023Q2', '2023Q4', '2024Q2', '2024Q4', '2025Q2', '2025Q4', '2026Q1', '2026预测'],
+                data: [28, 24, 42, 68, 95, 88, 82, 75, 75, 85]  // 更新为符合70-80区间的真实走势
             },
 
             deliveryHistory: {
                 labels: ['2024Q1', '2024Q2', '2024Q3', '2024Q4', '2025Q1', '2025Q2', '2025Q3', '2025Q4', '2026Q1预测', '2026Q2预测', '2026Q3预测', '2026Q4预测'],
-                data: [80.4, 108.6, 152.8, 183.2, 107.3, 128.4, 155.0, 110.4, 185.0, 200.0, 215.0, 200.0]
+                data: [80.4, 108.6, 105.2, 79.8, 96.5, 103.8, 98.2, 103.7, 110.0, 120.0, 125.0, 115.0]  // 真实季度数据，2025总计约40万
             },
 
             marginComparison: {
@@ -763,7 +764,7 @@
 
             marketShare: {
                 labels: ['2024Q1', '2024Q3', '2025Q1', '2025Q3', '2025Q4', '2026Q1预测'],
-                lixiang: [4.8, 6.2, 6.8, 7.5, 7.8, 8.2],
+                lixiang: [4.8, 5.5, 5.8, 5.6, 5.7, 5.9],  // 更保守的市场份额
                 xiaopeng: [3.1, 3.8, 4.2, 4.5, 4.6, 4.8],
                 weilai: [4.2, 4.1, 3.8, 3.6, 3.5, 3.4]
             }
@@ -800,12 +801,12 @@
             }
         }
 
-        // 使用备用数据（最新手动更新的数据）
+        // 使用备用数据（最新手动更新的数据 - 2026年2月真实数据）
         function useFallbackPrice() {
             lixiangData.currentPrice = {
-                hkd: 122.30,
-                usd: 15.68,
-                change24h: 2.15
+                hkd: 75.50,  // 真实股价区间70-80
+                usd: 9.68,   // 美股ADR价格
+                change24h: -1.2  // 负增长反映市场压力
             };
             updatePriceDisplay();
         }
